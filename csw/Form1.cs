@@ -36,6 +36,16 @@ namespace csw
             Aggiunta();
             MessageBox.Show("è stato aggiunto il campo  ");
         }
+        private void button2_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("il numero di campi è " + Contacampi().ToString());
+        }
+        private void button3_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show(LunghezzaMaxRecord().ToString());
+        }
+
+
 
         public void Aggiunta(char sep = ';')
         {
@@ -85,6 +95,32 @@ namespace csw
             }
             return lunghmax;
         }
+
+        public int LunghezzaMaxRecord(char a = ';')
+        {
+            string[] record =File.ReadAllLines(path);
+            for(int i = 0; i < record.Length; i++)
+            {
+                string[] campi = record[i].Split(a);
+                for (int j = 0; j < Contacampi(); j++)
+                {
+                    if (campi[j].Length > lunghmax)
+                    {
+                        lunghmax = campi[j].Length;
+                    }
+                    if (campi[j].Length == 0)
+                    {
+                        break;
+                    }
+                }
+
+            }
+            return lunghmax;
+        }
+
+
+
+
     }
 
 }
