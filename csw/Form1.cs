@@ -17,6 +17,8 @@ namespace csw
             public string stalli;
             public string Casual;
         }
+
+
         public int ncampi;
         public int lunghmax;
         public punto1[] p;
@@ -52,16 +54,18 @@ namespace csw
         }
         private void button5_Click(object sender, EventArgs e)
         {
-            MessageBox.Show(Visualizza().ToString());
+            Visualizza();
         }
         private void button6_Click(object sender, EventArgs e)
         {
-            MessageBox.Show(AggiuntaCoda().ToString());
+            AggiuntaCoda(textBox1.Text,textBox2.Text, textBox3.Text);
         }
         private void button7_Click(object sender, EventArgs e)
         {
             MessageBox.Show(ricerca().ToString());
         }
+
+
         public void Aggiunta(char sep = ';')
         {
             string[] linea = File.ReadAllLines(path);
@@ -177,6 +181,8 @@ namespace csw
             {
                 MessageBox.Show("Non esiste il file");
             }
+
+
         }
 
         public bool ricerca()
@@ -190,28 +196,27 @@ namespace csw
                 {
                     if (campi[0].ToLower() == textBox1.Text.ToLower())
                     {
-                        ricerca = true;
-                        break;
+                        return  true;
+                        
                     }
                     if (checkBox2.Checked == true)
                     {
                         if (campi[1].ToLower() == textBox2.Text.ToLower())
                         {
-                            ricerca = true;
-                            break;
+                            return true; 
                         }
                     }
                     if (checkBox3.Checked == true)
                     {
                         if (campi[2].ToLower() == textBox2.Text.ToLower())
                         {
-                            ricerca = true;
-                            break;
+                            return true;
                         }
                     }
                 }
-                return ricerca;
+                
             }
+            return false;
         }
 
         private void checkBox3_CheckedChanged(object sender, EventArgs e)
