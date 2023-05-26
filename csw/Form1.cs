@@ -48,21 +48,27 @@ namespace csw
         {
             MessageBox.Show(LunghezzaMaxRecord().ToString());
         }
-        private void button4_Click(object sender, EventArgs e)
+
+        private void numerospazibutttonclick(object sender, EventArgs e)
         {
             NumeroSpazi();
+
         }
-        private void button5_Click(object sender, EventArgs e)
+
+        private void visualizzabuttonclick(object sender, EventArgs e)
         {
             Visualizza();
+
         }
-        private void button6_Click(object sender, EventArgs e)
+
+        private void button6_Click_1(object sender, EventArgs e)
         {
-            AggiuntaCoda(textBox1.Text,textBox2.Text, textBox3.Text);
+            AggiuntaCoda(textBox1.Text, textBox2.Text, textBox3.Text);
         }
-        private void button7_Click(object sender, EventArgs e)
+
+        private void button7_Click_1(object sender, EventArgs e)
         {
-            MessageBox.Show(ricerca().ToString());
+            MessageBox.Show(ricerca());
         }
 
 
@@ -185,9 +191,8 @@ namespace csw
 
         }
 
-        public bool ricerca()
+        public string ricerca()
         {
-            bool ricerca = false;
             string[] record = File.ReadAllLines(path);
             for (int i = 0; i < record.Length; i++)
             {
@@ -196,33 +201,38 @@ namespace csw
                 {
                     if (campi[0].ToLower() == textBox1.Text.ToLower())
                     {
-                        return  true;
+                        return record[i];
                         
                     }
                     if (checkBox2.Checked == true)
                     {
                         if (campi[1].ToLower() == textBox2.Text.ToLower())
                         {
-                            return true; 
+                            return record[i];
+
                         }
                     }
                     if (checkBox3.Checked == true)
                     {
                         if (campi[2].ToLower() == textBox2.Text.ToLower())
                         {
-                            return true;
+                            return record[i];
                         }
                     }
                 }
                 
             }
-            return false;
+            return "";
         }
 
         private void checkBox3_CheckedChanged(object sender, EventArgs e)
         {
 
         }
+
+       
+
+       
     }
 
 }
