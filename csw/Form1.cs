@@ -21,6 +21,7 @@ namespace csw
 
         public int ncampi;
         public int lunghmax;
+        public string cancellato;
         public punto1[] p;
 
         public int dim;
@@ -73,6 +74,10 @@ namespace csw
     {
         MessageBox.Show(ricerca());
     }
+        private void button8_Click(object sender, EventArgs e)
+        {
+
+        }
 
 
         public void Aggiunta(char sep = ';')
@@ -228,12 +233,42 @@ namespace csw
         return "";
     }
 
+
+        public bool cancellazioneLogica(string cancellato ) 
+        {
+            bool canc= false;
+            string[]linee=File.ReadAllLines(path);
+            using(StreamWriter sw = new StreamWriter(path))
+            {
+                for(int i= 0; i < linee.Length; i++)
+                {
+                    string[] campi = linee[i].Split(';');
+                    if(cancellato.ToLower() == campi[0].ToLower())
+                    {
+                        campi[ncampi - 1] = "1";
+                        linee[i]=String.Join(";", campi);
+                        canc = true;
+
+                        break;
+                    }
+                }
+                for(int i= 0; i < linee.Length; i++)
+                {
+                    sw.WriteLine(linee[i]);
+                }
+            }
+            return canc;
+
+        }
+
         
 
        private void textBox1_TextChanged(object sender, EventArgs e)
        {
 
        }
+
+
     } 
 }
 
