@@ -76,8 +76,21 @@ namespace csw
     }
         private void button8_Click(object sender, EventArgs e)
         {
+            bool m = modifica();
+            if (m == true)
+            {
+                MessageBox.Show("Elemento modificato");
+            }
+            else
+            {
+                MessageBox.Show("Elemento non trovato");
+            }
+        }
+        private void button9_Click(object sender, EventArgs e)
+        {
 
         }
+
 
 
         public void Aggiunta(char sep = ';')
@@ -233,6 +246,56 @@ namespace csw
         return "";
     }
 
+        public bool modifica()
+        {
+            bool trova = false;
+            string[]linee=File.ReadAllLines(path);
+            using (StreamWriter sw = new StreamWriter(path))
+            {
+
+                int i = 1;
+                sw.WriteLine(linee[0]);
+                for (; i < linee.Length; i++)
+                {
+                    string[] campi = linee[i].Split(';');
+                    if (campi[0].ToLower() == textBox4.Text.ToLower())
+                    {
+                        trova = true;
+                        campi[0] = textBox5.Text;
+                        linee[i]=String.Join(";", campi);   
+                        sw.WriteLine(linee[i]);
+                        break;
+                    }
+                    else
+                        if (campi[1].ToLower() == textBox4.Text.ToLower())
+                    {
+                        trova = true;
+                        campi[1] = textBox5.Text;
+                        linee[i] = String.Join(";", campi);
+                        sw.WriteLine(linee[i]);
+                        break;
+                    }
+                    else
+                        if (campi[2].ToLower() == textBox4.Text.ToLower())
+                    {
+                        trova = true;
+                        campi[2] = textBox5.Text;
+                        linee[i] = String.Join(";", campi);
+                        sw.WriteLine(linee[i]);
+                        break;
+                    }
+                    i++;
+                    for (; i < linee.Length; i++)
+                    {
+                        sw.WriteLine(linee[i]);
+                    }
+
+                }
+                return trova;
+                
+            }
+            
+        }
 
         public bool cancellazioneLogica(string cancellato ) 
         {
@@ -267,6 +330,11 @@ namespace csw
        {
 
        }
+
+        private void textBox4_TextChanged(object sender, EventArgs e)
+        {
+
+        }
 
 
     } 
